@@ -732,5 +732,6 @@ document.querySelectorAll<HTMLButtonElement>(".tab").forEach((tab) =>
 );
 
 ($("amount") as HTMLInputElement).value = "0.001";
+($("wrapAmount") as HTMLInputElement).value = "0.002";
 syncLabels();
 void loadLaunches();
