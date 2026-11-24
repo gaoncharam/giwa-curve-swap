@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GIWA Curve Swap</title>
+    <meta name="description" content="Trade Ammora bonding-curve launches on GIWA Sepolia. Built with @ammora-protocol/sdk." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23111827'/%3E%3Cpath d='M6 22 C12 22 14 10 26 10' stroke='%2334d399' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="brand">
+        <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#111827"/><path d="M6 22 C12 22 14 10 26 10" stroke="#34d399" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+        <span class="name">GIWA Curve Swap</span>
+        <span class="net" id="net">GIWA Sepolia</span>
+      </div>
+      <button id="connect" class="btn btn-dark">Connect wallet</button>
+    </header>
+
+    <main class="layout">
+      <section class="panel list-panel">
+        <div class="panel-head">
+          <h2>Ammora launches</h2>
+          <label class="toggle"><input type="checkbox" id="onlyActive" checked /> Trading only</label>
+        </div>
+        <p class="hint">Bonding-curve tokens created through the Ammora V4 launch factory. Bar = WETH raised toward graduation.</p>
+        <div id="launches" class="launches"><div class="empty">Loading launches…</div></div>
+        <button id="more" class="btn btn-ghost" hidden>Load more</button>
+      </section>
+
+      <section class="panel swap-panel">
+        <div class="token-head" id="tokenHead">
+          <div class="empty">Pick a token on the left.</div>
+        </div>
+
+        <div class="tabs" role="tablist">
+          <button class="tab active" data-side="buy" role="tab">Buy</button>
+          <button class="tab" data-side="sell" role="tab">Sell</button>
+        </div>
+
+        <div class="field">
+          <div class="field-top"><span id="payLabel">You pay (WETH)</span><button class="link" id="maxBtn">Max</button></div>
+          <input id="amount" inputmode="decimal" placeholder="0.001" autocomplete="off" />
+          <div class="field-bottom">Balance: <span id="payBal">–</span></div>
+        </div>
+
+        <div class="quote" id="quote">
+          <div class="row"><span>You receive (est.)</span><b id="qOut">–</b></div>
+          <div class="row"><span>Minimum after 1% slippage</span><span id="qMin">–</span></div>
+          <div class="row"><span>Curve fee</span><span id="qFee">–</span></div>
+          <div class="row"><span>Quote block</span><span id="qBlock" class="mono">–</span></div>
+        </div>
+
+        <button id="swapBtn" class="btn btn-primary btn-wide" disabled>Connect wallet</button>
+
+        <div class="wrapbox">
+          <div class="wrap-title">ETH ⇄ WETH</div>
+          <p class="hint">New Ammora curves trade against WETH. Wrap a little ETH before buying; keep some ETH for gas.</p>
+          <div class="wrap-row">
+            <input id="wrapAmount" inputmode="decimal" placeholder="0.002" autocomplete="off" />
+            <button id="wrapBtn" class="btn btn-ghost" disabled>Wrap</button>
+            <button id="unwrapBtn" class="btn btn-ghost" disabled>Unwrap</button>
+          </div>
+          <div class="bal-line">ETH <span id="ethBal">–</span> · WETH <span id="wethBal">–</span></div>
+        </div>
+
+        <ol id="log" class="log"></ol>
+      </section>
+    </main>
+
+    <footer class="foot">
+      Built with <a href="https://www.npmjs.com/package/@ammora-protocol/sdk" target="_blank" rel="noopener">@ammora-protocol/sdk 0.3.9</a>
+      on GIWA Sepolia (chain 91342). Testnet tokens only, no real value.
+      Quotes, approvals and swaps run through <span class="mono">AmmoraSwapClient</span>.
+    </footer>
+
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>
